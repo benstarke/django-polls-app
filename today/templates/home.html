@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+
+<video width="400" controls autoplay>
+	  <source src="{{MEDIA_URL}}{{videofile}}" type='video/mp4'>
+</video>
+<br><br><br>
+
+{% for post in post %}
+
+{{post.title}}
+{{post.content}}
+<img src="{{post.image.url}}" width="200px" alt="">
+{{post.solution}}
+{{post.solve}}
+
+{% endfor %}
+
+<div>
+	   <form action="add_todo/" method="POST">
+			 {% csrf_token %}
+				 {{form.as_p}}
+				 <input type="submit">
+		 </form>
+</div>
+
+<h5>{{yes}}-users in this site</h5>
+<h2>Welcome {{user.username}}</h2><br>
+<h3>Your email is {{user.email}}</h3><br>
+<img src="{{user.profile.user_image.url}}" width="100px" alt="user image">
+<!--<h1>In this year-{{year}}</h1>-->
+{% for article in a_list %}
+
+<h3>{{article.reporter.full_name}}</h3>
+<h2>{{article.headline}}</h2>
+<h2>{{article.pub_date|date:"F j, Y"}}</h2>
+<p>{{article.content}}</p>
+
+{% endfor %}
+
+{% endblock %}
